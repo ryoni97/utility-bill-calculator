@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, useColorScheme, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
@@ -14,12 +14,6 @@ export default function CalculatorScreen() {
   const [result, setResult] = useState<number | null>(null);
   const [location, setLocation] = useState('central');
   const [isElectricity, setIsElectricity] = useState(true);
-  
-  useEffect(() => {
-    setIsElectricity(type === 'electricity');
-    setUsage('');
-    setResult(null);
-  }, [type]);
 
   const handleCalculate = async () => {
     if (!usage || isNaN(Number(usage)) || Number(usage) < 0) {
@@ -53,112 +47,108 @@ export default function CalculatorScreen() {
 
   const renderLocationSelector = () => {
     if (isElectricity) return null;
-    
+
     return (
       <View style={styles.selectorContainer}>
-        <Text style={[styles.sectionTitle, { color: isDark ? '#F9FAFB' : '#111827' }]}>
+        <Text style={{ fontWeight: 'bold', fontSize: 16, marginBottom: 8, color: isDark ? '#F9FAFB' : '#111827' }}>
           Select Your State
         </Text>
-        <ScrollView style={styles.locationOptionsContainer} showsVerticalScrollIndicator={false}>
-          <View style={styles.locationOptions}>
-            <TouchableOpacity 
-              style={[
-                styles.locationOption, 
-                location === 'central' && styles.selectedLocation,
-                { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
-              ]}
-              onPress={() => setLocation('central')}
-            >
-              <Text style={[
-                styles.locationText, 
-                location === 'central' && styles.selectedLocationText,
-                { color: isDark ? '#F9FAFB' : '#111827' }
-              ]}>
-                Central (Selangor, KL)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[
-                styles.locationOption, 
-                location === 'northern' && styles.selectedLocation,
-                { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
-              ]}
-              onPress={() => setLocation('northern')}
-            >
-              <Text style={[
-                styles.locationText, 
-                location === 'northern' && styles.selectedLocationText,
-                { color: isDark ? '#F9FAFB' : '#111827' }
-              ]}>
-                Northern (Penang, Perak)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[
-                styles.locationOption, 
-                location === 'southern' && styles.selectedLocation,
-                { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
-              ]}
-              onPress={() => setLocation('southern')}
-            >
-              <Text style={[
-                styles.locationText, 
-                location === 'southern' && styles.selectedLocationText,
-                { color: isDark ? '#F9FAFB' : '#111827' }
-              ]}>
-                Southern (Johor)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[
-                styles.locationOption, 
-                location === 'eastern' && styles.selectedLocation,
-                { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
-              ]}
-              onPress={() => setLocation('eastern')}
-            >
-              <Text style={[
-                styles.locationText, 
-                location === 'eastern' && styles.selectedLocationText,
-                { color: isDark ? '#F9FAFB' : '#111827' }
-              ]}>
-                Eastern (Pahang, Terengganu)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[
-                styles.locationOption, 
-                location === 'sabah' && styles.selectedLocation,
-                { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
-              ]}
-              onPress={() => setLocation('sabah')}
-            >
-              <Text style={[
-                styles.locationText, 
-                location === 'sabah' && styles.selectedLocationText,
-                { color: isDark ? '#F9FAFB' : '#111827' }
-              ]}>
-                Sabah
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={[
-                styles.locationOption, 
-                location === 'sarawak' && styles.selectedLocation,
-                { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
-              ]}
-              onPress={() => setLocation('sarawak')}
-            >
-              <Text style={[
-                styles.locationText, 
-                location === 'sarawak' && styles.selectedLocationText,
-                { color: isDark ? '#F9FAFB' : '#111827' }
-              ]}>
-                Sarawak
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+        <TouchableOpacity
+          style={[
+            styles.locationOption,
+            location === 'central' && styles.selectedLocation,
+            { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
+          ]}
+          onPress={() => setLocation('central')}
+        >
+          <Text style={[
+            styles.locationText,
+            location === 'central' && styles.selectedLocationText,
+            { color: isDark ? '#F9FAFB' : '#111827' }
+          ]}>
+            Central (Selangor, KL)
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.locationOption,
+            location === 'northern' && styles.selectedLocation,
+            { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
+          ]}
+          onPress={() => setLocation('northern')}
+        >
+          <Text style={[
+            styles.locationText,
+            location === 'northern' && styles.selectedLocationText,
+            { color: isDark ? '#F9FAFB' : '#111827' }
+          ]}>
+            Northern (Perlis, Kedah, Penang, Perak)
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.locationOption,
+            location === 'southern' && styles.selectedLocation,
+            { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
+          ]}
+          onPress={() => setLocation('southern')}
+        >
+          <Text style={[
+            styles.locationText,
+            location === 'southern' && styles.selectedLocationText,
+            { color: isDark ? '#F9FAFB' : '#111827' }
+          ]}>
+            Southern (Johor, Melaka, Negeri Sembilan)
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.locationOption,
+            location === 'eastern' && styles.selectedLocation,
+            { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
+          ]}
+          onPress={() => setLocation('eastern')}
+        >
+          <Text style={[
+            styles.locationText,
+            location === 'eastern' && styles.selectedLocationText,
+            { color: isDark ? '#F9FAFB' : '#111827' }
+          ]}>
+            Eastern (Pahang, Terengganu, Kelantan)
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.locationOption,
+            location === 'sabah' && styles.selectedLocation,
+            { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
+          ]}
+          onPress={() => setLocation('sabah')}
+        >
+          <Text style={[
+            styles.locationText,
+            location === 'sabah' && styles.selectedLocationText,
+            { color: isDark ? '#F9FAFB' : '#111827' }
+          ]}>
+            Sabah
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.locationOption,
+            location === 'sarawak' && styles.selectedLocation,
+            { backgroundColor: isDark ? '#1F2937' : '#FFFFFF' }
+          ]}
+          onPress={() => setLocation('sarawak')}
+        >
+          <Text style={[
+            styles.locationText,
+            location === 'sarawak' && styles.selectedLocationText,
+            { color: isDark ? '#F9FAFB' : '#111827' }
+          ]}>
+            Sarawak
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -222,7 +212,7 @@ export default function CalculatorScreen() {
           </View>
 
           {renderLocationSelector()}
-          
+
           <View style={styles.inputContainer}>
             <Text style={[styles.inputLabel, { color: isDark ? '#F9FAFB' : '#111827' }]}>
               {isElectricity ? 'Enter kWh Usage' : 'Enter Water Usage (liters)'}
@@ -321,7 +311,7 @@ const styles = StyleSheet.create({
   },
   selectorContainer: {
     marginBottom: 24,
-    maxHeight: Platform.OS === 'web' ? 300 : 200,
+    maxHeight: Platform.OS === 'web' ? 600 : 600,
   },
   locationOptionsContainer: {
     flex: 1,
@@ -334,7 +324,6 @@ const styles = StyleSheet.create({
   locationOptions: {
     flexDirection: Platform.OS === 'web' ? 'row' : 'column',
     flexWrap: Platform.OS === 'web' ? 'wrap' : 'nowrap',
-    gap: 12,
   },
   locationOption: {
     width: Platform.OS === 'web' ? '48%' : '100%',
@@ -345,6 +334,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
+    marginBottom: 12
   },
   selectedLocation: {
     backgroundColor: '#0891B2',

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "utility-bills-calculator",
+    "name": "Utility Bills Calculator",
     "slug": "utility-bills-calculator",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,6 +29,12 @@
       "eas": {
         "projectId": "aa56990e-6daf-4884-913c-0d93c47171a0"
       }
+    },
+    "android": {
+      "package": "com.ryoni.utilitybillscalculator"
     }
-  }
-}
+  }  
+}    
+  
+
+
